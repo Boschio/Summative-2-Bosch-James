@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer,handler"})
@@ -22,7 +23,7 @@ public class Publisher implements Serializable {
 
     private String phone;
     private String email;
-    //FIXME: reliant on Book model and expects the publisher id to be written as publisherId
+
     @OneToMany(mappedBy = "publisherId", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Book> books;
 
