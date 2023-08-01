@@ -1,5 +1,6 @@
 package com.company.bookstore.controller;
 
+import com.company.bookstore.model.Book;
 import com.company.bookstore.model.Publisher;
 import com.company.bookstore.repository.PublisherRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,7 +15,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.HashSet;
 import java.util.Optional;
 
 @WebMvcTest(PublisherController.class)
@@ -23,7 +26,7 @@ class PublisherControllerTest {
     private PublisherRepository publisherRepo;
 
     @Autowired
-    private MockBean mockMvc;
+    private MockMvc mockMvc;
 
     ObjectMapper mapper = new ObjectMapper();
 
@@ -91,7 +94,7 @@ class PublisherControllerTest {
 
     //should delete publisher by id
     @Test
-    void deletePublisher() {
+    void deletePublisher() throws Exception {
         mockMvc.perform(delete("/publisher/1"))
                 .andDo(print())
                 .andExpect(status().isNoContent());
