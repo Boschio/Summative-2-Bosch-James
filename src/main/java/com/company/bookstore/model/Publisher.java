@@ -16,8 +16,8 @@ public class Publisher implements Serializable {
     private Integer publisherId;
     private String publisherName;
 
-    private String streetName;
-    private String cityName;
+    private String street;
+    private String city;
     private String state;
     private String postalCode;
 
@@ -43,20 +43,20 @@ public class Publisher implements Serializable {
         this.publisherName = publisherName;
     }
 
-    public String getStreetName() {
-        return streetName;
+    public String getStreet() {
+        return street;
     }
 
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getCity() {
+        return city;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getState() {
@@ -104,12 +104,12 @@ public class Publisher implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Publisher publisher = (Publisher) o;
-        return publisherId.equals(publisher.publisherId) && publisherName.equals(publisher.publisherName) && streetName.equals(publisher.streetName) && cityName.equals(publisher.cityName) && state.equals(publisher.state) && postalCode.equals(publisher.postalCode) && phone.equals(publisher.phone) && email.equals(publisher.email) && Objects.equals(books, publisher.books);
+        return publisherId.equals(publisher.publisherId) && publisherName.equals(publisher.publisherName) && street.equals(publisher.street) && city.equals(publisher.city) && state.equals(publisher.state) && postalCode.equals(publisher.postalCode) && phone.equals(publisher.phone) && email.equals(publisher.email) && Objects.equals(books, publisher.books);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(publisherId, publisherName, streetName, cityName, state, postalCode, phone, email, books);
+        return Objects.hash(publisherId, publisherName, street, city, state, postalCode, phone, email, books);
     }
 
     @Override
@@ -117,8 +117,8 @@ public class Publisher implements Serializable {
         return "Publisher{" +
                 "publisherId=" + publisherId +
                 ", publisherName='" + publisherName + '\'' +
-                ", streetName='" + streetName + '\'' +
-                ", cityName='" + cityName + '\'' +
+                ", streetName='" + street + '\'' +
+                ", cityName='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", postalCode='" + postalCode + '\'' +
                 ", phone='" + phone + '\'' +

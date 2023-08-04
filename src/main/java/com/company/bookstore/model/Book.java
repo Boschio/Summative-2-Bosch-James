@@ -19,8 +19,12 @@ public class Book implements Serializable {
 
     private String isbn;
     private Date publishDate;
+
+    @Column(name="author_id")
     private int authorId;
     private String title;
+
+    @Column(name="publisher_id")
     private int publisherId;
     private BigDecimal price;
 

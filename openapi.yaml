@@ -1,0 +1,331 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /publisher:
+    put:
+      tags:
+        - publisher-controller
+      operationId: updatePublisher
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Publisher'
+        required: true
+      responses:
+        '204':
+          description: No Content
+    post:
+      tags:
+        - publisher-controller
+      operationId: createPublisher
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Publisher'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Publisher'
+  /books:
+    get:
+      tags:
+        - book-controller
+      operationId: getAllBooks
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+    put:
+      tags:
+        - book-controller
+      operationId: updateBook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+        required: true
+      responses:
+        '204':
+          description: No Content
+    post:
+      tags:
+        - book-controller
+      operationId: addBook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Book'
+  /authors:
+    get:
+      tags:
+        - author-controller
+      operationId: getAuthors
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+    put:
+      tags:
+        - author-controller
+      operationId: updateAuthor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+        required: true
+      responses:
+        '204':
+          description: No Content
+    post:
+      tags:
+        - author-controller
+      operationId: addAuthor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Author'
+  /publishers:
+    get:
+      tags:
+        - publisher-controller
+      operationId: getAllPublishers
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Publisher'
+  /publisher/{id}:
+    get:
+      tags:
+        - publisher-controller
+      operationId: getPublisherById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Publisher'
+    delete:
+      tags:
+        - publisher-controller
+      operationId: deletePublisher
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '204':
+          description: No Content
+  /books/{id}:
+    get:
+      tags:
+        - book-controller
+      operationId: getBookById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Book'
+    delete:
+      tags:
+        - book-controller
+      operationId: deleteBookById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '204':
+          description: No Content
+  /books/author/{id}:
+    get:
+      tags:
+        - book-controller
+      operationId: getAllBooksByAuthor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+  /authors/{id}:
+    get:
+      tags:
+        - author-controller
+      operationId: getAuthorById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Author'
+    delete:
+      tags:
+        - author-controller
+      operationId: deleteAuthor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '204':
+          description: No Content
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        isbn:
+          type: string
+        publishDate:
+          type: string
+          format: date-time
+        authorId:
+          type: integer
+          format: int32
+        title:
+          type: string
+        publisherId:
+          type: integer
+          format: int32
+        price:
+          type: number
+    Publisher:
+      type: object
+      properties:
+        publisherId:
+          type: integer
+          format: int32
+        publisherName:
+          type: string
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        books:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Book'
+    Author:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        firstName:
+          type: string
+        lastName:
+          type: string
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string

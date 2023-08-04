@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -18,7 +17,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.HashSet;
-import java.util.Optional;
 
 @WebMvcTest(PublisherController.class)
 class PublisherControllerTest {
@@ -52,8 +50,8 @@ class PublisherControllerTest {
         Publisher publisher = new Publisher();
 
         publisher.setPublisherName("Tina Jo");
-        publisher.setStreetName("Wiley");
-        publisher.setCityName("Pembroke Pines");
+        publisher.setStreet("Wiley");
+        publisher.setCity("Pembroke Pines");
         publisher.setState("FL");
         publisher.setPostalCode("12345");
         publisher.setPhone("111-111-1111");
@@ -75,8 +73,8 @@ class PublisherControllerTest {
         Publisher publisher = new Publisher();
 
         publisher.setPublisherName("Tina Jo");
-        publisher.setStreetName("Wiley");
-        publisher.setCityName("Pembroke Pines");
+        publisher.setStreet("Wiley");
+        publisher.setCity("Pembroke Pines");
         publisher.setState("FL");
         publisher.setPostalCode("12345");
         publisher.setPhone("111-111-1111");

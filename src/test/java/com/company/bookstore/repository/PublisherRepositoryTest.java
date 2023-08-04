@@ -32,8 +32,8 @@ class PublisherRepositoryTest {
     void getAllPublishers(){
         Publisher publisher = new Publisher();
         publisher.setPublisherName("Tina Jo");
-        publisher.setStreetName("Wiley");
-        publisher.setCityName("Pembroke Pines");
+        publisher.setStreet("Wiley");
+        publisher.setCity("Pembroke Pines");
         publisher.setState("FL");
         publisher.setPostalCode("12345");
         publisher.setPhone("111-111-1111");
@@ -44,8 +44,8 @@ class PublisherRepositoryTest {
 
         Publisher publisher2 = new Publisher();
         publisher2.setPublisherName("May Jo");
-        publisher2.setStreetName("Wiley");
-        publisher2.setCityName("Pembroke Pines");
+        publisher2.setStreet("Wiley");
+        publisher2.setCity("Pembroke Pines");
         publisher2.setState("FL");
         publisher2.setPostalCode("54321");
         publisher2.setPhone("222-222-2222");
@@ -63,8 +63,8 @@ class PublisherRepositoryTest {
     void getAllPublishersById(){
         Publisher publisher = new Publisher();
         publisher.setPublisherName("Tina Jo");
-        publisher.setStreetName("Wiley");
-        publisher.setCityName("Pembroke Pines");
+        publisher.setStreet("Wiley");
+        publisher.setCity("Pembroke Pines");
         publisher.setState("FL");
         publisher.setPostalCode("12345");
         publisher.setPhone("111-111-1111");
@@ -82,8 +82,8 @@ class PublisherRepositoryTest {
     void createPublisher() {
         Publisher publisher = new Publisher();
         publisher.setPublisherName("Tina Jo");
-        publisher.setStreetName("Wiley");
-        publisher.setCityName("Pembroke Pines");
+        publisher.setStreet("Wiley");
+        publisher.setCity("Pembroke Pines");
         publisher.setState("FL");
         publisher.setPostalCode("12345");
         publisher.setPhone("111-111-1111");
@@ -101,8 +101,8 @@ class PublisherRepositoryTest {
    void updatePublisher() {
         Publisher publisher = new Publisher();
         publisher.setPublisherName("Tina Jo");
-        publisher.setStreetName("Wiley");
-        publisher.setCityName("Pembroke Pines");
+        publisher.setStreet("Wiley");
+        publisher.setCity("Pembroke Pines");
         publisher.setState("FL");
         publisher.setPostalCode("12345");
         publisher.setPhone("111-111-1111");
@@ -124,8 +124,8 @@ class PublisherRepositoryTest {
     void deletePublisher(){
         Publisher publisher = new Publisher();
         publisher.setPublisherName("Tina Jo");
-        publisher.setStreetName("Wiley");
-        publisher.setCityName("Pembroke Pines");
+        publisher.setStreet("Wiley");
+        publisher.setCity("Pembroke Pines");
         publisher.setState("FL");
         publisher.setPostalCode("12345");
         publisher.setPhone("111-111-1111");
