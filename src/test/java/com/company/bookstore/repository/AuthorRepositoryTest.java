@@ -16,10 +16,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class AuthorRepositoryTest {
     @Autowired
     AuthorRepository authorRepository;
+    @Autowired
+    BookRepository bookRepository;
 
     Author author;
     @BeforeEach
     public void setUp() throws Exception {
+        bookRepository.deleteAll();
         authorRepository.deleteAll();
 
         author = new Author();
