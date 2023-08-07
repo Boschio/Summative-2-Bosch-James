@@ -1,6 +1,6 @@
 type Publisher {
     id: ID!
-    publisherName: String!
+    name: String!
     street: String!
     city: String!
     state: String!
