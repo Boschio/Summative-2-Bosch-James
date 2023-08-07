@@ -21,7 +21,7 @@ public class PublisherController {
     }
 
     //Get publisher by id
-    @GetMapping("/publisher/{id}")
+    @GetMapping("/publishers/{id}")
     public Publisher getPublisherById(@PathVariable Integer id){
         Optional<Publisher> publisher = publisherRepo.findById(id);
         if(publisher.isPresent()){
@@ -32,21 +32,21 @@ public class PublisherController {
     }
 
     // Create new publisher
-    @PostMapping("/publisher")
+    @PostMapping("/publishers")
     @ResponseStatus(HttpStatus.CREATED)
     public Publisher createPublisher(@RequestBody Publisher publisher){
         return publisherRepo.save(publisher);
     }
 
     //update publisher
-    @PutMapping("/publisher")
+    @PutMapping("/publishers")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updatePublisher(@RequestBody Publisher publisher){
         publisherRepo.save(publisher);
     }
 
     //delete publisher by id
-    @DeleteMapping("/publisher/{id}")
+    @DeleteMapping("/publishers/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePublisher(@PathVariable Integer id){
         publisherRepo.deleteById(id);

@@ -1,8 +1,10 @@
 package com.company.bookstore.model;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,34 +15,33 @@ public class Publisher implements Serializable {
     @Id
     @Column(name = "publisher_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer publisherId;
-    private String publisherName;
-
+    private Integer id;
+    private String name;
     private String street;
     private String city;
     private String state;
     private String postalCode;
-
     private String phone;
     private String email;
 
-    @OneToMany(mappedBy = "publisherId", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<Book> books;
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "publisher_id")
+    private Set<Book> books = new HashSet<>();
 
-    public Integer getPublisherId() {
-        return publisherId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setPublisherId(Integer publisherId) {
-        this.publisherId = publisherId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getPublisherName() {
-        return publisherName;
+    public String getName() {
+        return name;
     }
 
-    public void setPublisherName(String publisherName) {
-        this.publisherName = publisherName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStreet() {
@@ -104,19 +105,19 @@ public class Publisher implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Publisher publisher = (Publisher) o;
-        return publisherId.equals(publisher.publisherId) && publisherName.equals(publisher.publisherName) && street.equals(publisher.street) && city.equals(publisher.city) && state.equals(publisher.state) && postalCode.equals(publisher.postalCode) && phone.equals(publisher.phone) && email.equals(publisher.email) && Objects.equals(books, publisher.books);
+        return id.equals(publisher.id) && name.equals(publisher.name) && street.equals(publisher.street) && city.equals(publisher.city) && state.equals(publisher.state) && postalCode.equals(publisher.postalCode) && phone.equals(publisher.phone) && email.equals(publisher.email) && Objects.equals(books, publisher.books);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(publisherId, publisherName, street, city, state, postalCode, phone, email, books);
+        return Objects.hash(id, name, street, city, state, postalCode, phone, email, books);
     }
 
     @Override
     public String toString() {
         return "Publisher{" +
-                "publisherId=" + publisherId +
-                ", publisherName='" + publisherName + '\'' +
+                "publisherId=" + id +
+                ", publisherName='" + name + '\'' +
                 ", streetName='" + street + '\'' +
                 ", cityName='" + city + '\'' +
                 ", state='" + state + '\'' +

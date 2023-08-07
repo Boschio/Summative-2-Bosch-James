@@ -21,7 +21,7 @@ public class BookController {
     }
 
     @GetMapping("/books/{id}")
-    public Book getBookById(@PathVariable int id) {
+    public Book getBookById(@PathVariable Integer id) {
         Optional<Book> returnVal = repo.findById(id);
         if (returnVal.isPresent()) {
             return returnVal.get();
@@ -42,12 +42,12 @@ public class BookController {
 
     @DeleteMapping("/books/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteBookById(@PathVariable int id) {
+    public void deleteBookById(@PathVariable Integer id) {
         repo.deleteById(id);
     }
 
     @GetMapping("/books/author/{id}")
-    public List<Book> getAllBooksByAuthor(@PathVariable int id) {
+    public List<Book> getAllBooksByAuthor(@PathVariable Integer id) {
         return repo.findByAuthorId(id);
     }
 

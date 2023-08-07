@@ -21,7 +21,7 @@ public class AuthorController {
     }
 
     @GetMapping("/authors/{id}")
-    public Author getAuthorById(@PathVariable int id) {
+    public Author getAuthorById(@PathVariable Integer id) {
         Optional<Author> returnVal = repo.findById(id);
         if (returnVal.isPresent()) {
             return returnVal.get();
@@ -42,7 +42,7 @@ public class AuthorController {
 
     @DeleteMapping("/authors/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAuthor(@PathVariable int id) {
+    public void deleteAuthor(@PathVariable Integer id) {
         repo.deleteById(id);
     }
 

@@ -36,28 +36,28 @@ public class AuthorRepositoryTest {
     }
 
     @Test
-    public void shouldAddAuthor() {
+    public void createAuthor() {
         Optional<Author> author1 = authorRepository.findById(author.getId());
 
         assertEquals(author1.get(), author);
     }
 
     @Test
-    public void shouldGetAuthorById() {
+    public void getAuthorById() {
         Optional<Author> foundAuthor = authorRepository.findById(author.getId());
 
         assertEquals(foundAuthor.get(),author);
     }
 
     @Test
-    public void shouldGetAllAuthors() {
+    public void getAllAuthors() {
         List<Author> authorList = authorRepository.findAll();
 
         assertEquals(authorList.size(), 1);
     }
 
     @Test
-    public void shouldUpdateAuthor() {
+    public void updateAuthor() {
         author.setCity("Bronx");
         author.setPostalCode("10463");
 
@@ -69,7 +69,7 @@ public class AuthorRepositoryTest {
     }
 
     @Test
-    public void shouldDeleteAuthorById() {
+    public void deleteAuthorById() {
         Author authorToDel = new Author();
         authorToDel.setFirstName("Delete");
         authorToDel.setLastName("This");

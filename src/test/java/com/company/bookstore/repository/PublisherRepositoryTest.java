@@ -21,39 +21,40 @@ class PublisherRepositoryTest {
     @Autowired
     BookRepository bookRepo;
 
-    @BeforeEach
-    void setUp() {
-        pubRepo.deleteAll();
-        bookRepo.deleteAll();
-    }
+    Publisher publisher;
+    Publisher publisher2;
 
-    //Should get all publishers
-    @Test
-    void getAllPublishers(){
-        Publisher publisher = new Publisher();
-        publisher.setPublisherName("Tina Jo");
+    @BeforeEach
+    void setUp() throws Exception {
+        bookRepo.deleteAll();
+        pubRepo.deleteAll();
+
+        publisher = new Publisher();
+        publisher.setName("Tina Jo");
         publisher.setStreet("Wiley");
         publisher.setCity("Pembroke Pines");
         publisher.setState("FL");
         publisher.setPostalCode("12345");
         publisher.setPhone("111-111-1111");
         publisher.setEmail("tina@pub.com");
-        publisher.setBooks(new HashSet<Book>());
 
         publisher = pubRepo.save(publisher);
 
-        Publisher publisher2 = new Publisher();
-        publisher2.setPublisherName("May Jo");
+        publisher2 = new Publisher();
+        publisher2.setName("May Jo");
         publisher2.setStreet("Wiley");
         publisher2.setCity("Pembroke Pines");
         publisher2.setState("FL");
         publisher2.setPostalCode("54321");
         publisher2.setPhone("222-222-2222");
         publisher2.setEmail("may@pub.com");
-        publisher2.setBooks(new HashSet<Book>());
 
         publisher2 = pubRepo.save(publisher2);
+    }
 
+    //Should get all publishers
+    @Test
+    void getAllPublishers(){
         List<Publisher> publishers = pubRepo.findAll();
         assertEquals(2,publishers.size());
     }
@@ -61,82 +62,46 @@ class PublisherRepositoryTest {
     //Should get all publishers  by id
     @Test
     void getAllPublishersById(){
-        Publisher publisher = new Publisher();
-        publisher.setPublisherName("Tina Jo");
-        publisher.setStreet("Wiley");
-        publisher.setCity("Pembroke Pines");
-        publisher.setState("FL");
-        publisher.setPostalCode("12345");
-        publisher.setPhone("111-111-1111");
-        publisher.setEmail("tina@pub.com");
-        publisher.setBooks(new HashSet<Book>());
-
-        publisher = pubRepo.save(publisher);
-
-        Optional<Publisher> publisher2 = pubRepo.findById(publisher.getPublisherId());
-        assertEquals(publisher2.get(),publisher);
+        Optional<Publisher> publisher1 = pubRepo.findById(publisher.getId());
+        assertEquals(publisher1.get(),publisher);
     }
 
     //Should create a publisher
     @Test
     void createPublisher() {
-        Publisher publisher = new Publisher();
-        publisher.setPublisherName("Tina Jo");
-        publisher.setStreet("Wiley");
-        publisher.setCity("Pembroke Pines");
-        publisher.setState("FL");
-        publisher.setPostalCode("12345");
-        publisher.setPhone("111-111-1111");
-        publisher.setEmail("tina@pub.com");
-        publisher.setBooks(new HashSet<Book>());
-
-        publisher = pubRepo.save(publisher);
-
-        Optional<Publisher> publisher2 = pubRepo.findById(publisher.getPublisherId());
-        assertEquals(publisher2.get(), publisher);
+        Optional<Publisher> publisher1 = pubRepo.findById(publisher.getId());
+        assertEquals(publisher1.get(), publisher);
     }
 
    //Should update existing publisher
    @Test
    void updatePublisher() {
-        Publisher publisher = new Publisher();
-        publisher.setPublisherName("Tina Jo");
-        publisher.setStreet("Wiley");
-        publisher.setCity("Pembroke Pines");
-        publisher.setState("FL");
-        publisher.setPostalCode("12345");
-        publisher.setPhone("111-111-1111");
-        publisher.setEmail("tina@pub.com");
-        publisher.setBooks(new HashSet<Book>());
-
-        publisher = pubRepo.save(publisher);
-
-        publisher.setPublisherName("UPDATED");
+        publisher.setName("UPDATED");
 
         pubRepo.save(publisher);
 
-        Optional<Publisher> publisher2 = pubRepo.findById(publisher.getPublisherId());
-        assertEquals(publisher2.get(),publisher);
+        Optional<Publisher> publisher1 = pubRepo.findById(publisher.getId());
+        assertEquals(publisher1.get(),publisher);
    }
 
    //Should delete publisher by id
    @Test
     void deletePublisher(){
-        Publisher publisher = new Publisher();
-        publisher.setPublisherName("Tina Jo");
-        publisher.setStreet("Wiley");
-        publisher.setCity("Pembroke Pines");
-        publisher.setState("FL");
-        publisher.setPostalCode("12345");
-        publisher.setPhone("111-111-1111");
-        publisher.setEmail("tina@pub.com");
-        publisher.setBooks(new HashSet<Book>());
+        Publisher publisherToDel = new Publisher();
+        publisherToDel.setName("Tina Jo");
+        publisherToDel.setStreet("Wiley");
+        publisherToDel.setCity("Pembroke Pines");
+        publisherToDel.setState("FL");
+        publisherToDel.setPostalCode("12345");
+        publisherToDel.setPhone("111-111-1111");
+        publisherToDel.setEmail("tina@pub.com");
+        publisherToDel.setBooks(new HashSet<Book>());
 
-        publisher = pubRepo.save(publisher);
+        publisherToDel = pubRepo.save(publisherToDel);
 
-        pubRepo.deleteById(publisher.getPublisherId());
+        pubRepo.deleteById(publisherToDel.getId());
 
-        Optional<Publisher> publisher2 = pubRepo.findById(publisher.getPublisherId());
-        assertFalse(publisher2.isPresent());
+        Optional<Publisher> publisher1 = pubRepo.findById(publisherToDel.getId());
+        assertFalse(publisher1.isPresent());
     }
 }

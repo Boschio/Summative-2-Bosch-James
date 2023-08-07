@@ -1,10 +1,10 @@
 package com.company.bookstore.controller;
 
-import com.company.bookstore.model.Book;
 import com.company.bookstore.model.Publisher;
 import com.company.bookstore.repository.PublisherRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -16,10 +16,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.HashSet;
-
 @WebMvcTest(PublisherController.class)
 class PublisherControllerTest {
+
     @MockBean
     private PublisherRepository publisherRepo;
 
@@ -27,6 +26,20 @@ class PublisherControllerTest {
     private MockMvc mockMvc;
 
     ObjectMapper mapper = new ObjectMapper();
+
+    private Publisher publisher;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        publisher = new Publisher();
+        publisher.setName("Tina Jo");
+        publisher.setStreet("Wiley");
+        publisher.setCity("Pembroke Pines");
+        publisher.setState("FL");
+        publisher.setPostalCode("12345");
+        publisher.setPhone("111-111-1111");
+        publisher.setEmail("tina@pub.com");
+    }
 
     //should get all publishers
     @Test
@@ -39,7 +52,7 @@ class PublisherControllerTest {
     // should get publisher by id
     @Test
     void getPublisherById() throws Exception{
-        mockMvc.perform(get("/publisher/1"))
+        mockMvc.perform(get("/publishers/1"))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
@@ -47,20 +60,9 @@ class PublisherControllerTest {
     //should create publisher
     @Test
     void createPublisher() throws Exception {
-        Publisher publisher = new Publisher();
-
-        publisher.setPublisherName("Tina Jo");
-        publisher.setStreet("Wiley");
-        publisher.setCity("Pembroke Pines");
-        publisher.setState("FL");
-        publisher.setPostalCode("12345");
-        publisher.setPhone("111-111-1111");
-        publisher.setEmail("tina@pub.com");
-        publisher.setBooks(new HashSet<Book>());
-
         String input = mapper.writeValueAsString(publisher);
 
-        mockMvc.perform(post("/publisher")
+        mockMvc.perform(post("/publishers")
                         .content(input)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -70,20 +72,9 @@ class PublisherControllerTest {
     //should update publisher
     @Test
     void updatePublisher() throws Exception{
-        Publisher publisher = new Publisher();
-
-        publisher.setPublisherName("Tina Jo");
-        publisher.setStreet("Wiley");
-        publisher.setCity("Pembroke Pines");
-        publisher.setState("FL");
-        publisher.setPostalCode("12345");
-        publisher.setPhone("111-111-1111");
-        publisher.setEmail("tina@pub.com");
-        publisher.setBooks(new HashSet<Book>());
-
         String input = mapper.writeValueAsString(publisher);
 
-        mockMvc.perform(post("/publisher")
+        mockMvc.perform(put("/publishers")
                         .content(input)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -93,7 +84,7 @@ class PublisherControllerTest {
     //should delete publisher by id
     @Test
     void deletePublisher() throws Exception {
-        mockMvc.perform(delete("/publisher/1"))
+        mockMvc.perform(delete("/publishers/1"))
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }

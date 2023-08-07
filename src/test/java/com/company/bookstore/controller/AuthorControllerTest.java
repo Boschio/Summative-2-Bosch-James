@@ -31,6 +31,7 @@ public class AuthorControllerTest {
     @BeforeEach
     public void setUp() throws Exception {
         author = new Author();
+        author.setId(1);
         author.setFirstName("James");
         author.setLastName("Bosch");
         author.setStreet("55 Broadway Ave.");
@@ -39,10 +40,9 @@ public class AuthorControllerTest {
         author.setPostalCode("10001");
         author.setPhone("123-456-7890");
         author.setEmail("Test@test.com");
-        author.setId(1);
     }
     @Test
-    void shouldAddAuthor() throws Exception {
+    void createAuthor() throws Exception {
         String inputJson = mapper.writeValueAsString(author);
 
         mockMvc.perform(post("/authors")
@@ -53,21 +53,21 @@ public class AuthorControllerTest {
     }
 
     @Test
-    void shouldGetAuthorById() throws Exception {
+    void getAuthorById() throws Exception {
         mockMvc.perform(get("/authors/1"))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
 
     @Test
-    void shouldGetAllAuthors() throws Exception {
+    void getAllAuthors() throws Exception {
         mockMvc.perform(get("/authors"))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
 
     @Test
-    void shouldUpdateAuthor() throws Exception {
+    void updateAuthor() throws Exception {
         author.setCity("Bronx");
         String inputJson = mapper.writeValueAsString(author);
 
@@ -79,7 +79,7 @@ public class AuthorControllerTest {
     }
 
     @Test
-    void shouldDeleteAuthor() throws Exception {
+    void deleteAuthor() throws Exception {
         mockMvc.perform(delete("/authors/1"))
                 .andDo(print())
                 .andExpect(status().isNoContent());

@@ -2,8 +2,6 @@ package com.company.bookstore.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import com.company.bookstore.model.Book;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -14,16 +12,10 @@ import java.util.Set;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "author")
 public class Author implements Serializable {
-
     @Id
     @Column(name = "author_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "author_id")
-    private Set<Book> books = new HashSet<>();
-
+    private Integer id;
     private String firstName;
     private String lastName;
     private String street;
@@ -33,11 +25,15 @@ public class Author implements Serializable {
     private String phone;
     private String email;
 
-    public int getId() {
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id")
+    private Set<Book> books = new HashSet<>();
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
