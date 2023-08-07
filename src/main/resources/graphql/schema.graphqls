@@ -34,7 +34,7 @@ type Author {
 }
 
 type Query {
-    publisher: [Publisher]
+    publishers: [Publisher]
     books: [Book]
     authors: [Author]
     findPublisherById(id: ID!):Publisher
